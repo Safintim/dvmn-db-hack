@@ -1,4 +1,4 @@
-from .models import Schoolkid, Mark, Сhastisement, Commendation, Subject, Teacher, Lesson
+from .models import Schoolkid, Mark, Сhastisement, Commendation, Lesson
 import random
 
 
@@ -53,5 +53,3 @@ def make_commendation(schoolkid_name, subject):
                     )
     except Schoolkid.DoesNotExist:
         ...
-
-make_commendation('Фролов Иван Григорьевич', 'Музыка')
