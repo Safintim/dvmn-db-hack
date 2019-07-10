@@ -18,4 +18,12 @@ python manage.py shell
 
 4. Вызвать нужную функцию
 
+```python
+fix_marks(schoolkid_name)
+
+remove_сhastisements(schoolkid_name)
+
+make_commendation(schoolkid_name, subject)
+```
+
 ![Alt](http://ipic.su/img/img7/fs/orm3.1562416322.gif)
