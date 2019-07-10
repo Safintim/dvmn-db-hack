@@ -1,9 +1,9 @@
-from .models import Schoolkid, Mark, Сhastisement, Commendation, Lesson
+from datacenter.models import Schoolkid, Mark, Сhastisement, Commendation, Lesson
 import random
 
 
 def fix_marks(schoolkid_name):
-    bad_marks_child = Mark.objects.all().filter(
+    bad_marks_child = Mark.objects.filter(
         schoolkid__full_name=schoolkid_name,
         points__in=[2, 3])
     if bad_marks_child:
@@ -14,7 +14,7 @@ def fix_marks(schoolkid_name):
 
 
 def remove_сhastisements(schoolkid_name):
-    return Сhastisement.objects.all().filter(schoolkid__full_name=schoolkid_name).delete()
+    return Сhastisement.objects.filter(schoolkid__full_name=schoolkid_name).delete()
 
 
 def make_commendation(schoolkid_name, subject):
@@ -33,11 +33,11 @@ def make_commendation(schoolkid_name, subject):
             'Я поражен!',
             'Здорово!'
         ]
-        child = Schoolkid.objects.all().get(full_name=schoolkid_name)
-        exist_commendation = [c.created for c in Commendation.objects.all().filter(
+        child = Schoolkid.objects.get(full_name=schoolkid_name)
+        exist_commendation = [c.created for c in Commendation.objects.filter(
                                                                     schoolkid=child,
                                                                     subject__title=subject)]
-        lessons_child = Lesson.objects.all().filter(
+        lessons_child = Lesson.objects.filter(
             year_of_study=child.year_of_study,
             group_letter=child.group_letter,
             subject__title=subject
@@ -53,3 +53,5 @@ def make_commendation(schoolkid_name, subject):
                     )
     except Schoolkid.DoesNotExist:
         ...
+
+# Фролов Иван Григорьевич
