@@ -19,11 +19,11 @@ python manage.py shell
 4. Вызвать нужную функцию
 
 ```python
-fix_marks(schoolkid_name)
+fix_marks(schoolkid_name)  # исправить оценки
 
-remove_сhastisements(schoolkid_name)
+remove_сhastisements(schoolkid_name)  # удалить замечания
 
-make_commendation(schoolkid_name, subject)
+make_commendation(schoolkid_name, subject) # создать похвалу
 ```
 
 ![Alt](http://ipic.su/img/img7/fs/orm3.1562416322.gif)
