@@ -2,23 +2,36 @@ from datacenter.models import Schoolkid, Mark, Сhastisement, Commendation, Less
 import random
 
 
+def is_exist_schoolkid(schoolkid_name):
+    schoolkids = Schoolkid.objects.filter(full_name=schoolkid_name)
+    if not schoolkids or len(schoolkids) > 2:
+        print(f'По вашему запросу {schoolkid_name} найдено {len(schoolkids)} записей')
+        return False
+    return schoolkids[0]
+
+
 def fix_marks(schoolkid_name):
-    bad_marks_child = Mark.objects.filter(
-        schoolkid__full_name=schoolkid_name,
-        points__in=[2, 3])
-    if bad_marks_child:
-        for mark in bad_marks_child:
-            mark.points = random.randint(4, 5)
-            mark.save()
-    return bad_marks_child
+    schoolkid = is_exist_schoolkid(schoolkid_name)
+    if schoolkid:
+        bad_marks_child = Mark.objects.filter(
+            schoolkid=schoolkid,
+            points__in=[2, 3])
+        if bad_marks_child:
+            for mark in bad_marks_child:
+                mark.points = random.randint(4, 5)
+                mark.save()
+        return bad_marks_child
 
 
 def remove_сhastisements(schoolkid_name):
-    return Сhastisement.objects.filter(schoolkid__full_name=schoolkid_name).delete()
+    schoolkid = is_exist_schoolkid(schoolkid_name)
+    if schoolkid:
+        return Сhastisement.objects.filter(schoolkid=schoolkid).delete()
 
 
 def make_commendation(schoolkid_name, subject):
-    try:
+    schoolkid = is_exist_schoolkid(schoolkid_name)
+    if schoolkid:
         commendations = [
             'Молодец!',
             'Отлично!',
@@ -33,13 +46,12 @@ def make_commendation(schoolkid_name, subject):
             'Я поражен!',
             'Здорово!'
         ]
-        child = Schoolkid.objects.get(full_name=schoolkid_name)
         exist_commendation = [c.created for c in Commendation.objects.filter(
-                                                                    schoolkid=child,
-                                                                    subject__title=subject)]
+                                                                        schoolkid=schoolkid,
+                                                                        subject__title=subject)]
         lessons_child = Lesson.objects.filter(
-            year_of_study=child.year_of_study,
-            group_letter=child.group_letter,
+            year_of_study=schoolkid.year_of_study,
+            group_letter=schoolkid.group_letter,
             subject__title=subject
         ).exclude(date__in=exist_commendation)
         if lessons_child:
@@ -47,11 +59,10 @@ def make_commendation(schoolkid_name, subject):
             return Commendation.objects.create(
                         text=random.choice(commendations),
                         created=lesson.date,
-                        schoolkid=child,
+                        schoolkid=schoolkid,
                         subject=lesson.subject,
                         teacher=lesson.teacher
                     )
-    except Schoolkid.DoesNotExist:
-        ...
+
 
 # Фролов Иван Григорьевич
