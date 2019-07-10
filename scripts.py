@@ -49,13 +49,13 @@ def make_commendation(schoolkid_name, subject):
         exist_commendation = [c.created for c in Commendation.objects.filter(
                                                                         schoolkid=schoolkid,
                                                                         subject__title=subject)]
-        lessons_child = Lesson.objects.filter(
+        child_lessons = Lesson.objects.filter(
             year_of_study=schoolkid.year_of_study,
             group_letter=schoolkid.group_letter,
             subject__title=subject
         ).exclude(date__in=exist_commendation)
-        if lessons_child:
-            lesson = lessons_child[0]
+        if child_lessons:
+            lesson = child_lessons[0]
             return Commendation.objects.create(
                         text=random.choice(commendations),
                         created=lesson.date,
@@ -63,6 +63,3 @@ def make_commendation(schoolkid_name, subject):
                         subject=lesson.subject,
                         teacher=lesson.teacher
                     )
-
-
-# Фролов Иван Григорьевич
