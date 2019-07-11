@@ -4,9 +4,9 @@ import random
 
 def is_exist_schoolkid(schoolkid_name):
     schoolkids = Schoolkid.objects.filter(full_name=schoolkid_name)
-    if not schoolkids or len(schoolkids) > 2:
+    if not schoolkids or len(schoolkids) > 1:
         print(f'По вашему запросу <{schoolkid_name}> найдено {len(schoolkids)} записей')
-        return False
+        return None
     return schoolkids[0]
 
 
