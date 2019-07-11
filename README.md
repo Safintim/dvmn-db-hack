@@ -33,4 +33,4 @@ remove_сhastisements(schoolkid)  # удалить замечания
 make_commendation(schoolkid, subject) # создать похвалу
 ```
 
-![Alt](http://ipic.su/img/img7/fs/orm3.1562416322.gif)
+![Alt](http://ipic.su/img/img7/fs/orm3.1562881010.gif)
