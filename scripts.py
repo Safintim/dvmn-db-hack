@@ -56,3 +56,5 @@ def make_commendation(schoolkid, subject):
                     subject=lesson.subject,
                     teacher=lesson.teacher
                 )
+# Галкин Изяслав Филиппович
+# Фролов Иван Григорьевич

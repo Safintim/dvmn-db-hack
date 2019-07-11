@@ -16,14 +16,21 @@ python manage.py shell
 
 3. Скопировать содержимое scripts.py в shell
 
-4. Вызвать нужную функцию
+4. Получить ученика
 
 ```python
-fix_marks(schoolkid_name)  # исправить оценки
+schoolkid = get_schoolkid(schoolkid_name) # получить ученика
+```
 
-remove_сhastisements(schoolkid_name)  # удалить замечания
+5. Вызвать нужную функцию
 
-make_commendation(schoolkid_name, subject) # создать похвалу
+```python
+
+fix_marks(schoolkid)  # исправить оценки
+
+remove_сhastisements(schoolkid)  # удалить замечания
+
+make_commendation(schoolkid, subject) # создать похвалу
 ```
 
 ![Alt](http://ipic.su/img/img7/fs/orm3.1562416322.gif)
