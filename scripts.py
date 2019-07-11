@@ -4,10 +4,9 @@ import random
 
 def is_exist_schoolkid(schoolkid_name):
     schoolkids = Schoolkid.objects.filter(full_name=schoolkid_name)
-    if not schoolkids or len(schoolkids) > 1:
-        print(f'По вашему запросу <{schoolkid_name}> найдено {len(schoolkids)} записей')
-        return None
-    return schoolkids[0]
+    if len(schoolkids) == 1:
+        return schoolkids[0]
+    print(f'По вашему запросу <{schoolkid_name}> найдено {len(schoolkids)} записей')
 
 
 def fix_marks(schoolkid_name):
